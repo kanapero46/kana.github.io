@@ -46,20 +46,46 @@ public class CertificationClass extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 隱崎ｨｼ縺ｮ蛻晄悄蛹�
+		// 入力パラメータの取得
 		String getId = request.getParameter("id");
 		String getPw = request.getParameter("pw");
 
 		Cert = CertificationUser(getId , getPw);
 		System.out.println(Cert);
 		if (Cert != 1){
-			//NG繝｡繝�繧ｻ繝ｼ繧ｸ縺ｮ陦ｨ遉ｺ
+			//NGメッセージの表示
 			BackToNgMsg(request, response, Cert);
 			return;
 		}
-		System.out.println(Cert);
 		doGet(request, response);
 	}
+
+	/**
+	 * NGメッセージの表示
+	 * @param request
+	 * @param response
+	 * @param Cert
+	 * @throws ServletException
+	 * @throws IOException
+	 */
+	private void BackToNgMsg(HttpServletRequest request, HttpServletResponse response, int Cert)throws ServletException, IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+	 	out.println("<!DOCTYPE html>");
+		out.println("<html>");
+	 	out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
+	    out.println("<head>");
+	    out.println("<title>Webタイトル</title>");
+	    out.println("</head>");
+	    out.println("<body>");
+	    out.println("<h1>ログイン結果</h1>");
+	    out.println("ログインできませんでした。");
+	    out.println("<h5>StatusCode = " + Cert + "</h5>" );
+	    out.println("</body>");
+	    out.println("</html>");
+
+	}
+
 
 /**
  * 隱崎ｨｼmethod縲�return縺�1莉･螟悶�ｯNG
@@ -113,30 +139,5 @@ public class CertificationClass extends HttpServlet {
 		return (false);
 	}
 
-	/**
-	 * NGメッセージの表示
-	 * @param request
-	 * @param response
-	 * @param Cert
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	private void BackToNgMsg(HttpServletRequest request, HttpServletResponse response, int Cert)throws ServletException, IOException{
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-	 	out.println("<!DOCTYPE html>");
-		out.println("<html>");
-	 	out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">");
-	    out.println("<head>");
-	    out.println("<title>Webタイトル</title>");
-	    out.println("</head>");
-	    out.println("<body>");
-	    out.println("<h1>ログイン結果</h1>");
-	    out.println("ログインできませんでした。");
-	    out.println("<h5>StatusCode = " + Cert + "</h5>" );
-	    out.println("</body>");
-	    out.println("</html>");
-
-	}
 
 }
