@@ -20,7 +20,7 @@ public class CertificationClass extends HttpServlet {
 	final static String[] Password = { "pass", "admin" };
 	int Cert = 0;
 	/**
-	 * ログイン状態
+	 * ログイン状態 
 	 * ０：未ログイン
 	 * １：ログイン
 	 */
